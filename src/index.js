@@ -44,3 +44,21 @@ app.get('/emails', async (req, res) => {
   const emails = await getRecentEmails();
   res.json(emails);
 });
+
+import { analyzeEmail } from './ai.js';
+
+app.get('/analyze', async (req, res) => {
+  const emails = await getRecentEmails();
+  
+  const results = await Promise.all(
+    emails.map(async (email) => {
+      const analysis = await analyzeEmail(email);
+      return {
+        email,
+        analysis,
+      };
+    })
+  );
+
+  res.json(results);
+});
