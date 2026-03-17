@@ -62,3 +62,10 @@ app.get('/analyze', async (req, res) => {
 
   res.json(results);
 });
+
+import { getAvailableSlots } from './calendar.js';
+
+app.get('/slots', async (req, res) => {
+  const slots = await getAvailableSlots();
+  res.json(slots);
+});
