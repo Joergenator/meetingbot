@@ -37,3 +37,10 @@ app.get('/debug-auth-url', (req, res) => {
   const url = getAuthUrl();
   res.send(url);
 });
+
+import { getRecentEmails } from './gmail.js';
+
+app.get('/emails', async (req, res) => {
+  const emails = await getRecentEmails();
+  res.json(emails);
+});
